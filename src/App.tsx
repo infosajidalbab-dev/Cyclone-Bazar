@@ -6,10 +6,11 @@ import { AdminProductManagerPreview } from './components/AdminProductManagerPrev
 import { AdminOrderManagerPreview } from './components/AdminOrderManagerPreview';
 import { Phase3CartCheckoutPreview } from './components/Phase3CartCheckoutPreview';
 import { Phase4AdminDashboardPreview } from './components/Phase4AdminDashboardPreview';
-import { Database, FileCode, Smartphone, Package, CheckCircle2, ShoppingBag, Layers, Truck, CreditCard, LayoutDashboard, Sliders } from 'lucide-react';
+import { StorefrontHomePreview } from './components/StorefrontHomePreview';
+import { Database, FileCode, Smartphone, Package, CheckCircle2, ShoppingBag, Layers, Truck, CreditCard, LayoutDashboard, Store } from 'lucide-react';
 
 export default function App() {
-  const [activeView, setActiveView] = useState<'admin_dashboard' | 'checkout_phase3' | 'pdp' | 'admin_products' | 'admin_orders' | 'schema' | 'code'>('admin_dashboard');
+  const [activeView, setActiveView] = useState<'storefront_home' | 'admin_dashboard' | 'checkout_phase3' | 'pdp' | 'admin_products' | 'admin_orders' | 'schema' | 'code'>('storefront_home');
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
@@ -18,14 +19,24 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Zone 1: Single text element wordmark */}
           <div className="flex items-center gap-3">
-            <a href="/" className="text-xl font-bold tracking-tight text-[#0F4C81]">
-              Cyclone Mart
+            <a href="/" className="text-xl font-bold tracking-tight text-[#0F172A]">
+              Cyclone<span className="text-[#DC2626]">Mart</span>
             </a>
             <span className="hidden sm:inline text-xs text-slate-400 font-mono">v1.0-bd</span>
           </div>
 
           {/* Zone 2: Navigation Links (Single-line controls) */}
-          <nav className="hidden lg:flex items-center gap-4 text-xs sm:text-sm font-medium text-slate-600">
+          <nav className="hidden lg:flex items-center gap-3.5 text-xs sm:text-sm font-medium text-slate-600">
+            <button
+              onClick={() => setActiveView('storefront_home')}
+              className={`transition-colors flex items-center gap-1.5 ${
+                activeView === 'storefront_home' ? 'text-[#DC2626] font-extrabold' : 'hover:text-slate-900'
+              }`}
+            >
+              <Store className="w-4 h-4 text-[#DC2626]" />
+              <span>Storefront (Live)</span>
+            </button>
+
             <button
               onClick={() => setActiveView('admin_dashboard')}
               className={`transition-colors flex items-center gap-1.5 ${
@@ -33,7 +44,7 @@ export default function App() {
               }`}
             >
               <LayoutDashboard className="w-4 h-4 text-[#FF6B35]" />
-              <span>Admin Dashboard (Phase 4)</span>
+              <span>Dashboard</span>
             </button>
 
             <button
@@ -99,9 +110,9 @@ export default function App() {
 
           {/* Zone 3: Primary Action */}
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 text-xs text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span className="font-semibold">Launch Complete</span>
+            <div className="flex items-center gap-1.5 text-xs text-red-700 bg-red-50 px-3 py-1.5 rounded-lg border border-red-200">
+              <span className="w-2 h-2 rounded-full bg-[#DC2626] animate-ping"></span>
+              <span className="font-bold text-[#DC2626]">Storefront Live</span>
             </div>
           </div>
         </div>
@@ -109,12 +120,20 @@ export default function App() {
         {/* Mobile Sub-Navigation Bar */}
         <div className="lg:hidden flex border-t border-slate-100 bg-white overflow-x-auto py-1 px-2 gap-1">
           <button
+            onClick={() => setActiveView('storefront_home')}
+            className={`px-3 py-1.5 text-xs rounded-md whitespace-nowrap font-bold ${
+              activeView === 'storefront_home' ? 'bg-red-50 text-[#DC2626]' : 'text-slate-600'
+            }`}
+          >
+            Storefront
+          </button>
+          <button
             onClick={() => setActiveView('admin_dashboard')}
             className={`px-3 py-1.5 text-xs rounded-md whitespace-nowrap font-medium ${
               activeView === 'admin_dashboard' ? 'bg-blue-50 text-[#0F4C81] font-bold' : 'text-slate-600'
             }`}
           >
-            Dashboard (Phase 4)
+            Dashboard
           </button>
           <button
             onClick={() => setActiveView('checkout_phase3')}
@@ -168,45 +187,42 @@ export default function App() {
       </header>
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
         {/* Editorial Subheader */}
-        <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs">
+        <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-3xl">
-              {/* Unboxed Metadata (Zero-pill discipline) */}
+            <div className="space-y-1.5 max-w-3xl">
               <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
-                <span className="text-[#0F4C81] font-semibold">Laravel 11</span>
+                <span className="text-[#0F172A] font-bold">Cyclone Mart</span>
                 <span aria-hidden="true">·</span>
-                <span>Livewire 3</span>
+                <span className="text-[#DC2626] font-semibold">Mobile-First Storefront</span>
                 <span aria-hidden="true">·</span>
-                <span>Admin Dashboard</span>
+                <span>Laravel 11 & Tailwind CSS</span>
                 <span aria-hidden="true">·</span>
-                <span>Banner CRUD</span>
-                <span aria-hidden="true">·</span>
-                <span>Site Settings</span>
-                <span aria-hidden="true">·</span>
-                <span>Phase 4 Launch</span>
+                <span>Bangladesh Market</span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 leading-tight">
-                Admin Dashboard, Banners, Site Settings & Launch Architecture
+              <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                {activeView === 'storefront_home'
+                  ? 'Cyclone Mart E-Commerce Home Page Layout (সাইক্লোন মার্ট)'
+                  : 'Cyclone Mart Dropshipping Platform Architecture'}
               </h1>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Featuring the complete <code className="font-mono text-[#0F4C81] bg-slate-100 px-1 py-0.5 rounded text-xs">Dashboard</code> (Today's Sales ৳, Order volume, lifetime revenue, low stock alert counter, 10 recent orders & sales trend SVG chart), promotional <code className="font-mono text-[#0F4C81] bg-slate-100 px-1 py-0.5 rounded text-xs">BannerManager</code> with image uploads, <code className="font-mono text-[#0F4C81] bg-slate-100 px-1 py-0.5 rounded text-xs">SettingsManager</code>, and dynamic storefront integration.
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Featuring the complete Dark Navy Blue (<code className="font-mono text-[#0F172A] bg-slate-100 px-1 py-0.5 rounded text-xs">#0F172A</code>) and Crimson Red (<code className="font-mono text-[#DC2626] bg-red-50 px-1 py-0.5 rounded text-xs">#DC2626</code>) palette, hotline announcement bar, category sidebar with hero banner, and responsive 2-column mobile to 6-column desktop product grid with dual <strong className="text-slate-900 font-semibold">'কার্ট'</strong> & <strong className="text-[#DC2626] font-semibold">'অর্ডার করুন'</strong> buttons.
               </p>
             </div>
 
             {/* Quick Metrics */}
             <div className="grid grid-cols-2 gap-3 shrink-0">
-              <div className="p-3.5 bg-slate-50 border border-slate-100 rounded-xl">
-                <span className="text-[11px] text-slate-500 block uppercase font-mono tracking-wider">Metrics</span>
-                <span className="text-xl font-bold font-mono text-[#0F4C81] tabular-nums">6 Cards</span>
-                <span className="text-[10px] text-slate-500 block">Section 9.1 Spec</span>
+              <div className="p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                <span className="text-[10px] text-slate-500 block uppercase font-mono tracking-wider">Mobile Grid</span>
+                <span className="text-lg font-bold font-mono text-[#DC2626] tabular-nums">2 Columns</span>
+                <span className="text-[10px] text-slate-400 block">320px–430px Target</span>
               </div>
-              <div className="p-3.5 bg-slate-50 border border-slate-100 rounded-xl">
-                <span className="text-[11px] text-slate-500 block uppercase font-mono tracking-wider">Logistics</span>
-                <span className="text-xl font-bold font-mono text-[#28A745] tabular-nums">৳60/120</span>
-                <span className="text-[10px] text-slate-400 block">Dhaka / Outside Zone</span>
+              <div className="p-3 bg-slate-50 border border-slate-100 rounded-xl">
+                <span className="text-[10px] text-slate-500 block uppercase font-mono tracking-wider">Desktop Grid</span>
+                <span className="text-lg font-bold font-mono text-[#0F172A] tabular-nums">4 to 6 Cols</span>
+                <span className="text-[10px] text-slate-400 block">Category Sidebar</span>
               </div>
             </div>
           </div>
@@ -214,6 +230,7 @@ export default function App() {
 
         {/* View Component Display */}
         <div>
+          {activeView === 'storefront_home' && <StorefrontHomePreview />}
           {activeView === 'admin_dashboard' && <Phase4AdminDashboardPreview />}
           {activeView === 'checkout_phase3' && <Phase3CartCheckoutPreview />}
           {activeView === 'pdp' && <FrontendPdpPreview />}
@@ -229,12 +246,12 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="flex items-center gap-2">
             <span className="font-semibold text-slate-700">Cyclone Mart</span>
-            <span>— Mobile-First E-Commerce Architecture (Bangladesh Market)</span>
+            <span>— Mobile-First Dropshipping E-Commerce Architecture (Bangladesh)</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-500">
-            <span>Primary: #0F4C81</span>
-            <span>Accent: #FF6B35</span>
-            <span>Success: #28A745</span>
+          <div className="flex items-center gap-4 text-slate-500 font-mono text-[11px]">
+            <span>Primary: #0F172A</span>
+            <span>Accent/CTA: #DC2626</span>
+            <span>Canvas: #F8FAFC</span>
           </div>
         </div>
       </footer>
