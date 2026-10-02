@@ -1,0 +1,7 @@
+{
+  "name": "Cyclone Mart - Bangladesh Dropshipping Platform",
+  "description": "Mobile-first dropshipping e-commerce platform for the Bangladesh market featuring Cash on Delivery (COD), 4-tier BD address hierarchy, atomic order transactions, and clean Laravel 11 architecture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
